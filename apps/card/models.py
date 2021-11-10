@@ -20,3 +20,10 @@ class Card(BaseModel):
     )
     provided_email = models.EmailField(**COMMON_NULLABLE_FIELD_CONFIG)
     provided_phone_number = PhoneNumberField(**COMMON_NULLABLE_FIELD_CONFIG)
+
+    card_owned_by = models.ForeignKey(
+        to="authentication.User",
+        related_name="owned_%(class)s",
+        on_delete=models.SET_DEFAULT,
+        **COMMON_BLANK_AND_NULLABLE_FIELD_CONFIG,
+    )
