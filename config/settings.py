@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+APPS_DIR = BASE_DIR / "apps"
 
 
 # Quick-start development settings - unsuitable for production
@@ -30,6 +31,22 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+USER_APPS = [
+    "apps.administration",
+    "apps.association",
+    "apps.authentication",
+    "apps.card",
+    "apps.common",
+    "apps.meta",
+    "apps.organization",
+    "apps.trackers",
+]
+
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "django_filters"
+]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -37,6 +54,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    *USER_APPS,
+    *THIRD_PARTY_APPS,
 ]
 
 MIDDLEWARE = [
@@ -123,3 +142,5 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "authentication.User"

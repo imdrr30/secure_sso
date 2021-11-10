@@ -1,7 +1,6 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from apps.common.models import BaseModel, BaseIdentityModel
-from apps.forms.models import AbstractFormField, AbstractFormData
 
 # Create your models here.
 from apps.configurations.database import *
@@ -16,7 +15,7 @@ class Card(BaseModel):
     card_type = models.ForeignKey(to=CardType, on_delete=models.DO_NOTHING)
 
     provided_organization = models.ForeignKey(
-        to="organization.Organization", on_delete=models.DO_NOTHING
+        to="organization.Organization", related_name="provider_organization", on_delete=models.DO_NOTHING
     )
     provided_email = models.EmailField(**COMMON_NULLABLE_FIELD_CONFIG)
     provided_phone_number = PhoneNumberField(**COMMON_NULLABLE_FIELD_CONFIG)

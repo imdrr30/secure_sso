@@ -25,8 +25,8 @@ class User(BaseModel, AbstractBaseUser):
     phone_number = PhoneNumberField(**COMMON_NULLABLE_FIELD_CONFIG)
 
     user_type = models.ForeignKey(
-        to="adminstration.UserType",
-        related_name="created_%(class)s",
+        to="administration.UserType",
+        related_name="user_type",
         on_delete=models.SET_DEFAULT,
         **COMMON_BLANK_AND_NULLABLE_FIELD_CONFIG
     )

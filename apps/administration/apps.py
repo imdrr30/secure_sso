@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FormsConfig(AppConfig):
+class AdministrationConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "apps.forms"
+    name = "apps.administration"
