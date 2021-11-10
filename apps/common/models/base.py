@@ -1,6 +1,16 @@
 import uuid
 from django.db import models
 from apps.configurations.database import *
+import json
+
+
+def load_initial_data(model):
+
+    json_data = json.load(open(f"apps/initial_data/{model.__name__.lower()}.json", "r"))
+    model.objects.all().delete()
+    for data in json_data:
+        obj = model(**data)
+        obj.save()
 
 
 class BaseModel(models.Model):

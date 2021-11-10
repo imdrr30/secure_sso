@@ -42,10 +42,7 @@ USER_APPS = [
     "apps.trackers",
 ]
 
-THIRD_PARTY_APPS = [
-    "rest_framework",
-    "django_filters"
-]
+THIRD_PARTY_APPS = ["rest_framework", "django_filters"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",

@@ -4,9 +4,11 @@ from django.utils import timezone
 from apps.common.models import BaseModel
 from apps.configurations.database import *
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import UserManager
+from django.contrib.auth.models import PermissionsMixin
 
 
-class User(BaseModel, AbstractBaseUser):
+class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     # config fields
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
@@ -21,6 +23,7 @@ class User(BaseModel, AbstractBaseUser):
     )
 
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     phone_number = PhoneNumberField(**COMMON_NULLABLE_FIELD_CONFIG)
 
@@ -31,3 +34,5 @@ class User(BaseModel, AbstractBaseUser):
         **COMMON_BLANK_AND_NULLABLE_FIELD_CONFIG
     )
     date_joined = models.DateTimeField(default=timezone.now)
+
+    objects = UserManager()

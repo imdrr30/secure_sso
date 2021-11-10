@@ -7,7 +7,9 @@ from apps.configurations.database import *
 
 class Organization(BaseIdentityModel):
 
-    organization_code = models.CharField(max_length=COMMON_CHAR_FIELD_MAX_LENGTH, **COMMON_NULLABLE_FIELD_CONFIG)
+    organization_code = models.CharField(
+        max_length=COMMON_CHAR_FIELD_MAX_LENGTH, **COMMON_NULLABLE_FIELD_CONFIG
+    )
     parent_organization = models.ForeignKey(
         to="organization.Organization",
         on_delete=models.DO_NOTHING,
