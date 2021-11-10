@@ -17,4 +17,6 @@ class Command(BaseCommand):
             try:
                 load_initial_data(model)
             except Exception as e:
-                pass
+                # print(model.__name__)
+                # print(e)
+                continue

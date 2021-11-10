@@ -6,11 +6,24 @@ import json
 
 def load_initial_data(model):
 
-    json_data = json.load(open(f"apps/initial_data/{model.__name__.lower()}.json", "r"))
+    model_name = model.__name__.lower()
+    json_data = json.load(open(f"apps/initial_data/{model_name}.json", "r"))
     model.objects.all().delete()
+    is_user = model_name == "user"
+
     for data in json_data:
         obj = model(**data)
-        obj.save()
+        if is_user:
+            if "is_superuser" in data.keys() and data["is_superuser"]:
+                print("Creating Superuser.")
+                model.objects.create_superuser(**data)
+                print("Superuser created.")
+            else:
+                password = data.pop("password")
+                obj.set_password(password)
+                obj.save()
+        else:
+            obj.save()
 
 
 class BaseModel(models.Model):

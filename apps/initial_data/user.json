@@ -1,0 +1,28 @@
+[
+  {
+    "email": "admin@revn.me",
+    "username": "admin@revn.me",
+    "password": "Testpass@2020",
+    "is_superuser": true,
+    "is_staff": true,
+    "user_type_id": "ff737e0d-b8e2-408b-8efb-0ae0b96fce43"
+  },
+  {
+    "email": "jeydev@revn.me",
+    "username": "jeydev@revn.me",
+    "password": "Testpass@2020",
+    "user_type_id": "ed877a7f-30d7-4ead-8f7a-4ab00e04832e"
+  },
+  {
+    "email": "sriram@revn.me",
+    "username": "sriram@revn.me",
+    "password": "Testpass@2020",
+    "user_type_id": "68361172-37cf-4f1b-bce7-e1de881ed3e7"
+  },
+  {
+    "email": "nithish@revn.me",
+    "username": "nithish@revn.me",
+    "password": "Testpass@2020",
+    "user_type_id": "a59e6dd4-cfbc-488d-8f79-a315da6f1f70"
+  }
+]
