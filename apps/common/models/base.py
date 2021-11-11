@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from apps.configurations.database import *
 import json
+from apps.common.manager import BaseObjectManagerQuerySet
 
 
 def load_initial_data(model):
@@ -53,6 +54,8 @@ class BaseModel(models.Model):
     class Meta:
         ordering = ["-created"]
         abstract = True
+
+    objects = BaseObjectManagerQuerySet.as_manager()
 
 
 class BaseIdentityModel(BaseModel):

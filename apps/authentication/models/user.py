@@ -6,6 +6,7 @@ from apps.configurations.database import *
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.models import PermissionsMixin
+from rest_framework.authtoken.models import Token
 
 
 class User(BaseModel, AbstractBaseUser, PermissionsMixin):
@@ -33,6 +34,23 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         on_delete=models.SET_DEFAULT,
         **COMMON_BLANK_AND_NULLABLE_FIELD_CONFIG
     )
+
+    organization = models.ForeignKey(
+        to="organization.Organization",
+        on_delete=models.CASCADE,
+        **COMMON_NULLABLE_FIELD_CONFIG
+    )
+
     date_joined = models.DateTimeField(default=timezone.now)
 
     objects = UserManager()
+
+    def create_user_token(self):
+        token, created = Token.objects.get_or_create(user=self)
+        return token
+
+    def revoke_user_token(self, token):
+        Token.objects.filter(user=self, key=token).delete()
+
+    def revoke_all_user_token(self):
+        Token.objects.filter(user=self).delete()
