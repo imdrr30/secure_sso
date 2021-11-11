@@ -5,6 +5,4 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register("user", UserViewSet, "user")
 router.register("user-type", UserTypeViewSet, "user-type")
-urlpatterns = [
-    path("", include(router.urls))
-]
+urlpatterns = [path("", include(router.urls))]

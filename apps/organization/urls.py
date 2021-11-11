@@ -4,6 +4,4 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register("organization", OrganizationViewSet, "org")
-urlpatterns = [
-    path("", include(router.urls))
-]
+urlpatterns = [path("", include(router.urls))]

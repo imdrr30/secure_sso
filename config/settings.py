@@ -29,11 +29,7 @@ USER_APPS = [
     "apps.organization",
 ]
 
-THIRD_PARTY_APPS = [
-    "rest_framework",
-    "django_filters",
-    "rest_framework.authtoken"
-]
+THIRD_PARTY_APPS = ["rest_framework", "django_filters", "rest_framework.authtoken"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -134,7 +130,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "authentication.User"
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
     ]
 }

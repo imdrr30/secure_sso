@@ -4,5 +4,5 @@ from .models import Organization
 
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = '__all__'
+        fields = "__all__"
         model = Organization

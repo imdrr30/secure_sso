@@ -45,6 +45,9 @@ class UserTypeAccess(AbstractPermission):
     error_message = "You are not authorized to perform this action."
 
     def has_permission(self, request, view):
-        if hasattr(request.user, "user_type") and request.user.user_type.user_access_code in view.USER_ACCESS_CODES:
+        if (
+            hasattr(request.user, "user_type")
+            and request.user.user_type.user_access_code in view.USER_ACCESS_CODES
+        ):
             return True
         return False
