@@ -1,4 +1,5 @@
-from rest_framework import permissions, status
+from rest_framework import permissions
+from apps.configurations.viewsets import METHOD_TO_ACTION_TYPE
 
 
 class AbstractPermission(permissions.BasePermission):
@@ -45,17 +46,25 @@ class UserTypeAccess(AbstractPermission):
     error_message = "You are not authorized to perform this action."
 
     def has_permission(self, request, view):
-        access_file = (
-            view.USER_ACCESS_CODES
-            if hasattr(view, "USER_ACCESS_CODES")
-            else view.get_user_access_codes()
-        )
-        user_access_codes = (
-            access_file.keys() if hasattr(access_file, "keys") else access_file
-        )
+        user_access_codes = view.get_user_access_codes()
+
+        possible_actions = METHOD_TO_ACTION_TYPE.get(request.method, False)
+
+        if not possible_actions:
+            return False
+
         if (
             hasattr(request.user, "user_type")
-            and request.user.user_type.user_access_code in user_access_codes
+            and view.get_user_access_type() in user_access_codes.keys()
         ):
-            return True
+            action_flag = False
+
+            allowed_actions = user_access_codes[view.get_user_access_type()][
+                "operations"
+            ].keys()
+            for action in possible_actions:
+                if action in allowed_actions:
+                    action_flag = True
+                    break
+            return action_flag
         return False

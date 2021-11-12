@@ -1,4 +1,4 @@
-from apps.common.responses import success_response, error_response
+from apps.common.responses import success_response
 from apps.common.views.mixins import (
     LogoutRequired,
 )
