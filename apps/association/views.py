@@ -1,4 +1,4 @@
-from rest_framework.viewsets import ModelViewSet
+from apps.common.views.viewsets import BaseModelViewSet
 from .models import CardOrganizationAssociation
 from .serializers import CardOrganizationAssociationSerializer
 from apps.common.views.permissions import UserTypeAccess
@@ -6,16 +6,36 @@ from apps.common.views.permissions import UserTypeAccess
 # Create your views here.
 
 
-class CardOrganizationAssociationViewSet(ModelViewSet):
+class CardOrganizationAssociationViewSet(BaseModelViewSet):
 
     serializer_class = CardOrganizationAssociationSerializer
-    USER_ACCESS_CODES = (
-        "SUPERADMIN_GATWAY",
-        "ADMIN_GATWAY",
-        "SUPERADMIN_ORG",
-        "ADMIN_ORG",
-        "END_USER",
-        "EMP_ORG",
-    )
     permission_classes = (UserTypeAccess,)
-    queryset = CardOrganizationAssociation.objects.all()
+
+    def get_user_access_codes(self):
+        model = CardOrganizationAssociation
+        return {
+            "SUPERADMIN_GATWAY": {
+                "queryset": model.objects.all(),
+            },
+            "ADMIN_GATWAY": {
+                "queryset": model.objects.all(),
+            },
+            "SUPERADMIN_ORG": {
+                "queryset": model.objects.filter(
+                    organization=self.request.user.organization
+                )
+            },
+            "ADMIN_ORG": {
+                "queryset": model.objects.filter(
+                    organization=self.request.user.organization
+                )
+            },
+            "EMP_ORG": {
+                "queryset": model.objects.filter(
+                    organization=self.request.user.organization
+                )
+            },
+            "END_USER": {
+                "queryset": model.objects.filter(card__card_owned_by=self.request.user)
+            },
+        }

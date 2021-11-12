@@ -1,4 +1,4 @@
-from rest_framework.viewsets import ModelViewSet
+from apps.common.views.viewsets import BaseModelViewSet
 from .models import Organization
 from .serializers import OrganizationSerializer
 from apps.common.views.permissions import UserTypeAccess
@@ -6,12 +6,18 @@ from apps.common.views.permissions import UserTypeAccess
 # Create your views here.
 
 
-class OrganizationViewSet(ModelViewSet):
+class OrganizationViewSet(BaseModelViewSet):
 
     serializer_class = OrganizationSerializer
-    USER_ACCESS_CODES = (
-        "SUPERADMIN_GATWAY",
-        "ADMIN_GATWAY",
-    )
     permission_classes = (UserTypeAccess,)
-    queryset = Organization.objects.all()
+
+    def get_user_access_codes(self):
+        model = Organization
+        return {
+            "SUPERADMIN_GATWAY": {
+                "queryset": model.objects.all(),
+            },
+            "ADMIN_GATWAY": {
+                "queryset": model.objects.all(),
+            },
+        }

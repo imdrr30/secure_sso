@@ -1,4 +1,4 @@
-from rest_framework.viewsets import ModelViewSet
+from apps.common.views.viewsets import BaseModelViewSet
 from .models import UserType
 from .serializers import UserTypeSerializer, User, UserSerializer
 from apps.common.views.permissions import UserTypeAccess
@@ -6,23 +6,46 @@ from apps.common.views.permissions import UserTypeAccess
 # Create your views here.
 
 
-class UserTypeViewSet(ModelViewSet):
+class UserTypeViewSet(BaseModelViewSet):
 
     serializer_class = UserTypeSerializer
     USER_ACCESS_CODES = ("SUPERADMIN_GATWAY",)
     permission_classes = (UserTypeAccess,)
-    queryset = UserType.objects.all()
+
+    def get_user_access_codes(self):
+        return {
+            "SUPERADMIN_GATWAY": {
+                "queryset": UserType.objects.all(),
+            },
+        }
 
 
-class UserViewSet(ModelViewSet):
+class UserViewSet(BaseModelViewSet):
     serializer_class = UserSerializer
-    USER_ACCESS_CODES = (
-        "SUPERADMIN_GATWAY",
-        "ADMIN_GATWAY",
-        "SUPERADMIN_ORG",
-        "ADMIN_ORG",
-        "END_USER",
-        "EMP_ORG",
-    )
     permission_classes = (UserTypeAccess,)
-    queryset = User.objects.all()
+
+    def get_user_access_codes(self):
+        return {
+            "SUPERADMIN_GATWAY": {
+                "queryset": User.objects.all(),
+            },
+            "ADMIN_GATWAY": {
+                "queryset": User.objects.all(),
+            },
+            "SUPERADMIN_ORG": {
+                "queryset": User.objects.filter(
+                    organization=self.request.user.organization
+                )
+            },
+            "ADMIN_ORG": {
+                "queryset": User.objects.filter(
+                    organization=self.request.user.organization
+                )
+            },
+            "EMP_ORG": {
+                "queryset": User.objects.filter(
+                    organization=self.request.user.organization
+                )
+            },
+            "END_USER": {"queryset": User.objects.filter(id=self.request.user.id)},
+        }
