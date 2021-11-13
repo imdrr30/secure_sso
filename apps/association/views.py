@@ -45,6 +45,11 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 ),
                 "common_meta": {
                     "fields": "__all__",
+                    "extra_kwargs": {
+                        "is_association_accepted_by_user": {
+                            "is_read_only": True,
+                        }
+                    },
                 },
                 "operations": {
                     "list": True,
@@ -60,6 +65,11 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 ),
                 "common_meta": {
                     "fields": "__all__",
+                    "extra_kwargs": {
+                        "is_association_accepted_by_user": {
+                            "is_read_only": True,
+                        }
+                    },
                 },
                 "operations": {
                     "list": True,
@@ -75,6 +85,11 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 ),
                 "common_meta": {
                     "fields": "__all__",
+                    "extra_kwargs": {
+                        "is_association_accepted_by_user": {
+                            "is_read_only": True,
+                        }
+                    },
                 },
                 "operations": {
                     "list": True,
@@ -89,11 +104,16 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                     card__card_owned_by=self.request.user
                 ),
                 "common_meta": {
-                    "fields": "__all__",
+                    "exclude": ("customer_data",),
+                    "read_only_fields": (
+                        "card",
+                        "organization",
+                        "user_id_for_organization",
+                        "is_association_accepted_by_organization",
+                    ),
                 },
                 "operations": {
                     "list": True,
-                    "create": True,
                     "delete": True,
                     "update": True,
                     "detail": True,
