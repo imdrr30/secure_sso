@@ -18,6 +18,8 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     # auth related | note: username and email are the same
     username = models.CharField(max_length=COMMON_CHAR_FIELD_MAX_LENGTH, unique=True)
     email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=COMMON_CHAR_FIELD_MAX_LENGTH,**COMMON_BLANK_AND_NULLABLE_FIELD_CONFIG)
+    last_name = models.CharField(max_length=COMMON_CHAR_FIELD_MAX_LENGTH,**COMMON_BLANK_AND_NULLABLE_FIELD_CONFIG)
 
     password = models.CharField(
         max_length=COMMON_CHAR_FIELD_MAX_LENGTH, **COMMON_NULLABLE_FIELD_CONFIG

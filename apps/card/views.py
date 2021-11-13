@@ -2,6 +2,7 @@ from apps.common.views.viewsets import BaseModelViewSet
 from .models import CardType, Card
 from apps.common.views.permissions import UserTypeAccess
 from django.db.models import Q
+from .actions import CARD_ACTIONS
 
 # Create your views here.
 
@@ -19,6 +20,7 @@ class CardViewSet(BaseModelViewSet):
                 "common_meta": {
                     "fields": "__all__",
                 },
+                "extra_fields": CARD_ACTIONS,
                 "operations": {
                     "list": True,
                     "create": True,
@@ -32,6 +34,7 @@ class CardViewSet(BaseModelViewSet):
                 "common_meta": {
                     "fields": "__all__",
                 },
+                "extra_fields": CARD_ACTIONS,
                 "operations": {
                     "list": True,
                     "create": True,
@@ -47,6 +50,7 @@ class CardViewSet(BaseModelViewSet):
                 "common_meta": {
                     "fields": "__all__",
                 },
+                "extra_fields": CARD_ACTIONS,
                 "operations": {
                     "list": True,
                     "create": True,
@@ -62,6 +66,7 @@ class CardViewSet(BaseModelViewSet):
                 "common_meta": {
                     "fields": "__all__",
                 },
+                "extra_fields": CARD_ACTIONS,
                 "operations": {
                     "list": True,
                     "create": True,
@@ -77,6 +82,7 @@ class CardViewSet(BaseModelViewSet):
                 "common_meta": {
                     "fields": "__all__",
                 },
+                "extra_fields": CARD_ACTIONS,
                 "operations": {
                     "list": True,
                     "create": True,
@@ -96,8 +102,6 @@ class CardViewSet(BaseModelViewSet):
                 },
                 "operations": {
                     "list": True,
-                    "create": True,
-                    "delete": True,
                     "update": True,
                     "detail": True,
                 },

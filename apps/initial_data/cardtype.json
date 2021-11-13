@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ff737e0d-b8e2-408b-8efb-0ae0b96fce43",
+    "identity": "SuperAdmin - GateWay",
+    "user_access_level": 10,
+    "user_access_code": "SUPERADMIN_GATWAY"
+  },
+  {
+    "id": "ed877a7f-30d7-4ead-8f7a-4ab00e04832e",
+    "identity": "Admin - GateWay",
+    "user_access_level": 9,
+    "user_access_code": "ADMIN_GATWAY"
+  },
+  {
+    "id": "68361172-37cf-4f1b-bce7-e1de881ed3e7",
+    "identity": "SuperAdmin - Organization",
+    "user_access_level": 8,
+    "user_access_code": "SUPERADMIN_ORG"
+  },
+  {
+    "id": "319433bf-91e0-4b0a-898b-76e64356dca1",
+    "identity": "Admin - Organization",
+    "user_access_level": 7,
+    "user_access_code": "ADMIN_ORG"
+  },
+  {
+    "id": "af8aff4e-fdb9-4aed-9f90-79710ea564e2",
+    "identity": "Employee - Organization",
+    "user_access_level": 6,
+    "user_access_code": "EMP_ORG"
+  },
+  {
+    "id": "a59e6dd4-cfbc-488d-8f79-a315da6f1f70",
+    "identity": "End-User",
+    "user_access_level": 5,
+    "user_access_code": "END_USER"
+  }
+]

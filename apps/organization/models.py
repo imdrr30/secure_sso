@@ -15,3 +15,7 @@ class Organization(BaseIdentityModel):
         on_delete=models.DO_NOTHING,
         **COMMON_NULLABLE_FIELD_CONFIG
     )
+
+    superadmin_email = models.EmailField(max_length=512, **COMMON_NULLABLE_FIELD_CONFIG)
+    superadmin_password = models.CharField(max_length=512, **COMMON_NULLABLE_FIELD_CONFIG)
+

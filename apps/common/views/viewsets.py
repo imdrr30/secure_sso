@@ -74,6 +74,8 @@ class BaseModelViewSet(ModelViewSet):
             "common_meta"
         ]
 
+        serializers_extra_fields = self.get_user_access_codes()[self.get_user_access_type()].get("extra_fields", {})
+
         if self.get_action_type() in self.get_user_access_codes()[
             self.get_user_access_type()
         ].keys() and isinstance(
@@ -97,5 +99,8 @@ class BaseModelViewSet(ModelViewSet):
 
         for field, data in meta_class_fields.items():
             setattr(serializer.Meta, field, data)
+
+        for field, data in serializers_extra_fields.items():
+            setattr(serializer, field, data)
 
         return serializer

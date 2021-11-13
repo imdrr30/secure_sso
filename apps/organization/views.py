@@ -1,7 +1,7 @@
 from apps.common.views.viewsets import BaseModelViewSet
 from .models import Organization
 from apps.common.views.permissions import UserTypeAccess
-
+from apps.administration.actions import ORGANIZATION_EXTRA_SERIALIZER_FIELDS
 # Create your views here.
 
 
@@ -15,6 +15,7 @@ class OrganizationViewSet(BaseModelViewSet):
         return {
             "SUPERADMIN_GATWAY": {
                 "queryset": model.objects.all(),
+                "extra_fields": ORGANIZATION_EXTRA_SERIALIZER_FIELDS,
                 "common_meta": {
                     "fields": "__all__",
                 },
@@ -28,6 +29,7 @@ class OrganizationViewSet(BaseModelViewSet):
             },
             "ADMIN_GATWAY": {
                 "queryset": model.objects.all(),
+                "extra_fields": ORGANIZATION_EXTRA_SERIALIZER_FIELDS,
                 "common_meta": {
                     "fields": "__all__",
                 },

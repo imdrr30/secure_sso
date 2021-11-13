@@ -111,5 +111,16 @@ class UserViewSet(BaseModelViewSet):
                     "detail": True,
                 },
             },
-            "END_USER": {"queryset": User.objects.filter(id=self.request.user.id)},
+            "END_USER": {
+                "queryset": User.objects.filter(id=self.request.user.id),
+                "common_meta": {
+                    "fields": "__all__",
+                    "extra_kwargs": {"password": {"write_only": True}},
+                },
+                "operations": {
+                    "list": True,
+                    "delete": True,
+                    "detail": True,
+                },
+            },
         }
