@@ -22,7 +22,7 @@ def create_super_user_for_organization(cls, validated_data):
         "email": email,
         "username": email,
         "organization": organization,
-        "user_type": UserType.objects.get(user_access_code="SUPERADMIN_ORG")
+        "user_type": UserType.objects.get(user_access_code="SUPERADMIN_ORG"),
     }
     user = User(**user_data)
     user.set_password(password)

@@ -17,5 +17,6 @@ class Organization(BaseIdentityModel):
     )
 
     superadmin_email = models.EmailField(max_length=512, **COMMON_NULLABLE_FIELD_CONFIG)
-    superadmin_password = models.CharField(max_length=512, **COMMON_NULLABLE_FIELD_CONFIG)
-
+    superadmin_password = models.CharField(
+        max_length=512, **COMMON_NULLABLE_FIELD_CONFIG
+    )

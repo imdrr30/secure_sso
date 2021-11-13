@@ -6,11 +6,11 @@ from apps.administration.models import UserType
 class RegistrationSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'phone_number', 'password')
-        required = ('first_name', 'last_name', 'email', 'phone_number', 'password')
+        fields = ("first_name", "last_name", "email", "phone_number", "password")
+        required = ("first_name", "last_name", "email", "phone_number", "password")
 
     def create(self, validated_data):
-        password = validated_data.pop('password', None)
+        password = validated_data.pop("password", None)
         user = User(**validated_data)
         user.set_password(password)
         user.username = user.email
@@ -19,7 +19,7 @@ class RegistrationSerializer(ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        password = validated_data.pop('password', None)
+        password = validated_data.pop("password", None)
         for field, data in validated_data.items():
             setattr(instance, field, data)
         instance.set_password(password)

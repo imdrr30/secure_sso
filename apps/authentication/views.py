@@ -28,7 +28,6 @@ class LoginView(LogoutRequired, ObtainAuthToken):
 
 
 class RegistrationView(LogoutRequired, BaseAPIView):
-
     def post(self, request, *args, **kwargs):
         serializer = RegistrationSerializer(
             data=request.data, context={"request": request}
@@ -37,5 +36,6 @@ class RegistrationView(LogoutRequired, BaseAPIView):
         user = serializer.save()
         token = user.create_user_token()
         return success_response(
-            "Registration Completed Successfully.", data={"token": token.key, "user_id": user.pk, "email": user.email}
+            "Registration Completed Successfully.",
+            data={"token": token.key, "user_id": user.pk, "email": user.email},
         )

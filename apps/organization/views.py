@@ -2,6 +2,7 @@ from apps.common.views.viewsets import BaseModelViewSet
 from .models import Organization
 from apps.common.views.permissions import UserTypeAccess
 from apps.administration.actions import ORGANIZATION_EXTRA_SERIALIZER_FIELDS
+
 # Create your views here.
 
 

@@ -11,7 +11,7 @@ class CardType(BaseIdentityModel):
 
 
 class Card(BaseModel):
-    card_uid = models.CharField(max_length=COMMON_CHAR_FIELD_MAX_LENGTH)
+    card_uid = models.CharField(max_length=COMMON_CHAR_FIELD_MAX_LENGTH, unique=True)
     card_type = models.ForeignKey(to=CardType, on_delete=models.DO_NOTHING)
 
     provided_organization = models.ForeignKey(
