@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
 
 
 class BaseModelViewSet(ModelViewSet):
@@ -9,6 +10,17 @@ class BaseModelViewSet(ModelViewSet):
     def get_user_access_codes(self):
         return {}
 
+    @staticmethod
+    def wrap_success_response(response, message, error_code=None):
+        data = {
+            "status": "success",
+            "message": message,
+            "error_code": error_code,
+            "data": response.data
+        }
+        response.data = data
+        return response
+
     def get_model(self):
         return self.model_data
 
@@ -16,27 +28,43 @@ class BaseModelViewSet(ModelViewSet):
         return self.request.user.user_type.user_access_code
 
     def get_queryset(self):
-        return self.get_user_access_codes()[self.get_user_access_type()]["queryset"]
+        return self.get_user_access_codes()[self.get_user_access_type()]["queryset"].filter(is_deleted=False)
 
     def create(self, request, *args, **kwargs):
         self.action_type = "create"
-        return super().create(request, *args, **kwargs)
+        response = super().create(request, *args, **kwargs)
+
+        return self.wrap_success_response(response, f"{self.get_model().__name__} created successfully.")
 
     def update(self, request, *args, **kwargs):
         self.action_type = "update"
-        return super().update(request, *args, **kwargs)
+
+        response = super().update(request, *args, **kwargs)
+        return self.wrap_success_response(response, f"{self.get_model().__name__} update successfully.")
 
     def retrieve(self, request, *args, **kwargs):
         self.action_type = "detail"
-        return super().retrieve(request, *args, **kwargs)
+        response = super().retrieve(request, *args, **kwargs)
+
+        return self.wrap_success_response(response, f"{self.get_model().__name__} retrieved successfully.")
 
     def list(self, request, *args, **kwargs):
         self.action_type = "list"
-        return super().list(request, *args, **kwargs)
+
+        response = super().list(request, *args, **kwargs)
+        return self.wrap_success_response(response, f"{self.get_model().__name__} listed successfully.")
 
     def destroy(self, request, *args, **kwargs):
         self.action_type = "delete"
-        return super().destroy(request, *args, **kwargs)
+        obj = self.get_object()
+        obj.is_deleted = True
+        obj.save()
+        return Response(data={
+            "status": "success",
+            "message": f"{obj.id} is deleted.",
+            "error_code": None,
+            "data": None
+        })
 
     def get_action_type(self):
         return self.action_type
