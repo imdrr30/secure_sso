@@ -41,4 +41,16 @@ class OrganizationViewSet(BaseModelViewSet):
                     "detail": True,
                 },
             },
+            "SUPERADMIN_ORG": {
+                "queryset": model.objects.filter(id=self.request.user.organization.id),
+                "extra_fields": ORGANIZATION_EXTRA_SERIALIZER_FIELDS,
+                "common_meta": {
+                    "fields": "__all__",
+                },
+                "operations": {
+                    "list": True,
+                    "update": True,
+                    "detail": True,
+                },
+            },
         }
