@@ -13,10 +13,10 @@ class CardViewSet(BaseModelViewSet):
     permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
-        model = Card
+        model_queryset = Card.objects.all()
         return {
             "SUPERADMIN_GATWAY": {
-                "queryset": model.objects.all(),
+                "queryset": model_queryset,
                 "common_meta": {
                     "fields": "__all__",
                 },
@@ -30,7 +30,7 @@ class CardViewSet(BaseModelViewSet):
                 },
             },
             "ADMIN_GATWAY": {
-                "queryset": model.objects.all(),
+                "queryset": model_queryset,
                 "common_meta": {
                     "fields": "__all__",
                 },
@@ -44,7 +44,7 @@ class CardViewSet(BaseModelViewSet):
                 },
             },
             "SUPERADMIN_ORG": {
-                "queryset": model.objects.filter(
+                "queryset": model_queryset.filter(
                     provided_organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -60,7 +60,7 @@ class CardViewSet(BaseModelViewSet):
                 },
             },
             "ADMIN_ORG": {
-                "queryset": model.objects.filter(
+                "queryset": model_queryset.filter(
                     provided_organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -76,7 +76,7 @@ class CardViewSet(BaseModelViewSet):
                 },
             },
             "EMP_ORG": {
-                "queryset": model.objects.filter(
+                "queryset": model_queryset.filter(
                     provided_organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -92,7 +92,7 @@ class CardViewSet(BaseModelViewSet):
                 },
             },
             "END_USER": {
-                "queryset": model.objects.filter(
+                "queryset": model_queryset.filter(
                     Q(card_owned_by=self.request.user)
                     | Q(provided_email=self.request.user.email)
                     | Q(provided_phone_number=self.request.user.phone_number)
@@ -115,10 +115,10 @@ class CardTypeViewSet(BaseModelViewSet):
     permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
-        model = CardType
+        model_queryset = CardType.objects.all()
         return {
             "SUPERADMIN_GATWAY": {
-                "queryset": model.objects.all(),
+                "queryset": model_queryset,
                 "common_meta": {
                     "fields": "__all__",
                 },
@@ -131,7 +131,7 @@ class CardTypeViewSet(BaseModelViewSet):
                 },
             },
             "ADMIN_GATWAY": {
-                "queryset": model.objects.all(),
+                "queryset": model_queryset,
                 "common_meta": {
                     "fields": "__all__",
                 },

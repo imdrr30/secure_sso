@@ -12,10 +12,10 @@ class OrganizationViewSet(BaseModelViewSet):
     permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
-        model = Organization
+        model_queryset = Organization.objects.all()
         return {
             "SUPERADMIN_GATWAY": {
-                "queryset": model.objects.all(),
+                "queryset": model_queryset,
                 "extra_fields": ORGANIZATION_EXTRA_SERIALIZER_FIELDS,
                 "common_meta": {
                     "fields": "__all__",
@@ -29,7 +29,7 @@ class OrganizationViewSet(BaseModelViewSet):
                 },
             },
             "ADMIN_GATWAY": {
-                "queryset": model.objects.all(),
+                "queryset": model_queryset,
                 "extra_fields": ORGANIZATION_EXTRA_SERIALIZER_FIELDS,
                 "common_meta": {
                     "fields": "__all__",
@@ -43,7 +43,7 @@ class OrganizationViewSet(BaseModelViewSet):
                 },
             },
             "SUPERADMIN_ORG": {
-                "queryset": model.objects.filter(id=self.request.user.organization.id),
+                "queryset": model_queryset.filter(id=self.request.user.organization.id if self.request.user.organization is not None else None),
                 "extra_fields": ORGANIZATION_EXTRA_SERIALIZER_FIELDS,
                 "common_meta": {
                     "fields": "__all__",

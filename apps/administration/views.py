@@ -34,9 +34,10 @@ class UserViewSet(BaseModelViewSet):
     permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
+        model_queryset = User.objects.all()
         return {
             "SUPERADMIN_GATWAY": {
-                "queryset": User.objects.all(),
+                "queryset": model_queryset,
                 "common_meta": {
                     "fields": "__all__",
                     "extra_kwargs": {"password": {"write_only": True}},
@@ -50,7 +51,7 @@ class UserViewSet(BaseModelViewSet):
                 },
             },
             "ADMIN_GATWAY": {
-                "queryset": User.objects.all(),
+                "queryset": model_queryset,
                 "common_meta": {
                     "fields": "__all__",
                     "extra_kwargs": {"password": {"write_only": True}},
@@ -64,7 +65,7 @@ class UserViewSet(BaseModelViewSet):
                 },
             },
             "SUPERADMIN_ORG": {
-                "queryset": User.objects.filter(
+                "queryset": model_queryset.filter(
                     organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -80,7 +81,7 @@ class UserViewSet(BaseModelViewSet):
                 },
             },
             "ADMIN_ORG": {
-                "queryset": User.objects.filter(
+                "queryset": model_queryset.filter(
                     organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -96,7 +97,7 @@ class UserViewSet(BaseModelViewSet):
                 },
             },
             "EMP_ORG": {
-                "queryset": User.objects.filter(
+                "queryset": model_queryset.filter(
                     organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -112,7 +113,7 @@ class UserViewSet(BaseModelViewSet):
                 },
             },
             "END_USER": {
-                "queryset": User.objects.filter(id=self.request.user.id),
+                "queryset": model_queryset.filter(id=self.request.user.id),
                 "common_meta": {
                     "fields": "__all__",
                     "extra_kwargs": {"password": {"write_only": True}},

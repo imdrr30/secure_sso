@@ -11,10 +11,10 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
     permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
-        model = CardOrganizationAssociation
+        model_queryset = CardOrganizationAssociation.objects.all()
         return {
             "SUPERADMIN_GATWAY": {
-                "queryset": model.objects.all(),
+                "queryset": model_queryset,
                 "common_meta": {
                     "fields": "__all__",
                 },
@@ -27,7 +27,7 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 },
             },
             "ADMIN_GATWAY": {
-                "queryset": model.objects.all(),
+                "queryset": model_queryset,
                 "common_meta": {
                     "fields": "__all__",
                 },
@@ -40,7 +40,7 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 },
             },
             "SUPERADMIN_ORG": {
-                "queryset": model.objects.filter(
+                "queryset": model_queryset.filter(
                     organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -55,7 +55,7 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 },
             },
             "ADMIN_ORG": {
-                "queryset": model.objects.filter(
+                "queryset": model_queryset.filter(
                     organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -70,7 +70,7 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 },
             },
             "EMP_ORG": {
-                "queryset": model.objects.filter(
+                "queryset": model_queryset.filter(
                     organization=self.request.user.organization
                 ),
                 "common_meta": {
@@ -85,7 +85,7 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 },
             },
             "END_USER": {
-                "queryset": model.objects.filter(card__card_owned_by=self.request.user),
+                "queryset": model_queryset.filter(card__card_owned_by=self.request.user),
                 "common_meta": {
                     "fields": "__all__",
                 },
