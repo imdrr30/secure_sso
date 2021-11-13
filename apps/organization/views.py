@@ -43,7 +43,11 @@ class OrganizationViewSet(BaseModelViewSet):
                 },
             },
             "SUPERADMIN_ORG": {
-                "queryset": model_queryset.filter(id=self.request.user.organization.id if self.request.user.organization is not None else None),
+                "queryset": model_queryset.filter(
+                    id=self.request.user.organization.id
+                    if self.request.user.organization is not None
+                    else None
+                ),
                 "extra_fields": ORGANIZATION_EXTRA_SERIALIZER_FIELDS,
                 "common_meta": {
                     "fields": "__all__",

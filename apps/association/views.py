@@ -85,7 +85,9 @@ class CardOrganizationAssociationViewSet(BaseModelViewSet):
                 },
             },
             "END_USER": {
-                "queryset": model_queryset.filter(card__card_owned_by=self.request.user),
+                "queryset": model_queryset.filter(
+                    card__card_owned_by=self.request.user
+                ),
                 "common_meta": {
                     "fields": "__all__",
                 },
