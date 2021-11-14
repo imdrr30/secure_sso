@@ -5,6 +5,7 @@ from apps.common.views.mixins import (
 from rest_framework.authtoken.views import ObtainAuthToken
 from apps.common.views import BaseAPIView
 from .serializers import RegistrationSerializer
+from apps.card.models import Card
 
 # Create your views here.
 
@@ -34,6 +35,7 @@ class RegistrationView(LogoutRequired, BaseAPIView):
         )
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        Card.objects.filter(phone_number=user.phone_number).update(card_owned_by=user)
         token = user.create_user_token()
         return success_response(
             "Registration Completed Successfully.",
