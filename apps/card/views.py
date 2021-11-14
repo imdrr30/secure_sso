@@ -13,7 +13,6 @@ class CardViewSet(BaseModelViewSet):
 
     def get_user_access_codes(self):
         model_queryset = Card.objects.all()
-        breakpoint()
         return {
             "SUPERADMIN_GATWAY": {
                 "queryset": model_queryset,
