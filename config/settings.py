@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,9 +13,9 @@ APPS_DIR = BASE_DIR / "apps"
 SECRET_KEY = "django-insecure-ej!o$k3k)qiehadg&u*x%)oz*i5dcr4%1$9kj#$o-2eb&3ecz8"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("ENV", "dev") == "dev"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.0", "api.gateway.revn.me"]
 
 
 # Application definition
