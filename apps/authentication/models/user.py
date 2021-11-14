@@ -34,7 +34,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    phone_number = PhoneNumberField(**COMMON_NULLABLE_FIELD_CONFIG)
+    phone_number = PhoneNumberField(**COMMON_NULLABLE_FIELD_CONFIG, unique=True)
 
     user_type = models.ForeignKey(
         to="administration.UserType",
