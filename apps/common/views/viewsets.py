@@ -1,11 +1,15 @@
 from rest_framework import serializers
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from apps.common.views.permissions import UserTypeAccess
 
 
 class BaseModelViewSet(ModelViewSet):
     action_type = None
     model_data = None
+    filterset_fields = '__all__'
+    permission_classes = (IsAuthenticated, UserTypeAccess,)
 
     def get_user_access_codes(self):
         return {}

@@ -1,6 +1,5 @@
 from apps.common.views.viewsets import BaseModelViewSet
 from .models import CardOrganizationAssociation
-from apps.common.views.permissions import UserTypeAccess
 
 # Create your views here.
 
@@ -8,7 +7,6 @@ from apps.common.views.permissions import UserTypeAccess
 class CardOrganizationAssociationViewSet(BaseModelViewSet):
 
     model_data = CardOrganizationAssociation
-    permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
         model_queryset = CardOrganizationAssociation.objects.all()

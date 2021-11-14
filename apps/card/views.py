@@ -1,6 +1,5 @@
 from apps.common.views.viewsets import BaseModelViewSet
 from .models import CardType, Card
-from apps.common.views.permissions import UserTypeAccess
 from django.db.models import Q
 from .actions import CARD_ACTIONS
 
@@ -10,7 +9,6 @@ from .actions import CARD_ACTIONS
 class CardViewSet(BaseModelViewSet):
 
     serializer_class = Card
-    permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
         model_queryset = Card.objects.all()
@@ -112,7 +110,6 @@ class CardViewSet(BaseModelViewSet):
 class CardTypeViewSet(BaseModelViewSet):
 
     model_data = CardType
-    permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
         model_queryset = CardType.objects.all()

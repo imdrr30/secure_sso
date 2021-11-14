@@ -1,6 +1,5 @@
 from apps.common.views.viewsets import BaseModelViewSet
 from .models import Organization
-from apps.common.views.permissions import UserTypeAccess
 from apps.administration.actions import ORGANIZATION_EXTRA_SERIALIZER_FIELDS
 
 # Create your views here.
@@ -9,7 +8,6 @@ from apps.administration.actions import ORGANIZATION_EXTRA_SERIALIZER_FIELDS
 class OrganizationViewSet(BaseModelViewSet):
 
     model_data = Organization
-    permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
         model_queryset = Organization.objects.all()

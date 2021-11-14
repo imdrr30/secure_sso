@@ -15,7 +15,7 @@ SECRET_KEY = "django-insecure-ej!o$k3k)qiehadg&u*x%)oz*i5dcr4%1$9kj#$o-2eb&3ecz8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("ENV", "dev") == "dev"
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.0", "api.gateway.revn.me"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "api.gateway.revn.me"]
 
 
 # Application definition
@@ -134,7 +134,8 @@ AUTH_USER_MODEL = "authentication.User"
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

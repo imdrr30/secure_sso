@@ -1,7 +1,6 @@
 from apps.common.views.viewsets import BaseModelViewSet
 from .models import UserType
 from apps.authentication.models import User
-from apps.common.views.permissions import UserTypeAccess
 
 # Create your views here.
 
@@ -9,7 +8,6 @@ from apps.common.views.permissions import UserTypeAccess
 class UserTypeViewSet(BaseModelViewSet):
 
     model_data = UserType
-    permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
         return {
@@ -31,7 +29,6 @@ class UserTypeViewSet(BaseModelViewSet):
 
 class UserViewSet(BaseModelViewSet):
     model_data = User
-    permission_classes = (UserTypeAccess,)
 
     def get_user_access_codes(self):
         model_queryset = User.objects.all()
