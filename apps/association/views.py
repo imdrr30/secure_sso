@@ -174,7 +174,6 @@ class AssociationViewSet(BaseModelViewSet):
                 "common_meta": {
                     "fields": "__all__",
                 },
-                "extra_fields": CARD_ACTIONS,
                 "operations": {
                     "list": True,
                     "detail": True,
@@ -187,7 +186,6 @@ class AssociationViewSet(BaseModelViewSet):
                 "common_meta": {
                     "fields": "__all__",
                 },
-                "extra_fields": CARD_ACTIONS,
                 "operations": {
                     "list": True,
                     "detail": True,
@@ -200,7 +198,6 @@ class AssociationViewSet(BaseModelViewSet):
                 "common_meta": {
                     "fields": "__all__",
                 },
-                "extra_fields": CARD_ACTIONS,
                 "operations": {
                     "list": True,
                     "detail": True,
