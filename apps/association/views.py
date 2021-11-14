@@ -4,6 +4,7 @@ from apps.common.responses import error_response, success_response
 from .models import PairCode, CardOrganizationAssociation
 from .permissions import IsOrganization, IsEndUser
 from rest_framework.permissions import IsAuthenticated
+from apps.helpers.common import get_or_none
 
 from ..common.views.viewsets import BaseModelViewSet
 
@@ -166,6 +167,45 @@ class AssociationViewSet(BaseModelViewSet):
     def get_user_access_codes(self):
         model_queryset = CardOrganizationAssociation.objects.all()
         return {
+            "SUPERADMIN_ORG": {
+                "queryset": model_queryset.filter(
+                    organization=get_or_none(self.request.user.organization)
+                ),
+                "common_meta": {
+                    "fields": "__all__",
+                },
+                "extra_fields": CARD_ACTIONS,
+                "operations": {
+                    "list": True,
+                    "detail": True,
+                },
+            },
+            "ADMIN_ORG": {
+                "queryset": model_queryset.filter(
+                    organization=get_or_none(self.request.user.organization)
+                ),
+                "common_meta": {
+                    "fields": "__all__",
+                },
+                "extra_fields": CARD_ACTIONS,
+                "operations": {
+                    "list": True,
+                    "detail": True,
+                },
+            },
+            "EMP_ORG": {
+                "queryset": model_queryset.filter(
+                    organization=get_or_none(self.request.user.organization)
+                ),
+                "common_meta": {
+                    "fields": "__all__",
+                },
+                "extra_fields": CARD_ACTIONS,
+                "operations": {
+                    "list": True,
+                    "detail": True,
+                },
+            },
             "END_USER": {
                 "queryset": model_queryset.filter(
                     card__card_owned_by=self.request.user
