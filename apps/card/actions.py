@@ -14,7 +14,7 @@ def create_card_from_organization(cls, validated_data):
     customer_data = validated_data.pop("customer_data", None)
 
     card = Card(**validated_data)
-    users = User.objects.get(phone_number=validated_data["phone_number"])
+    users = User.objects.get(phone_number=validated_data["provided_phone_number"])
     if len(users) > 0:
         card.card_owned_by = users[0]
     card.save()
