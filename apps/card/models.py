@@ -18,7 +18,7 @@ class Card(BaseModel):
         to="organization.Organization",
         related_name="provider_organization",
         on_delete=models.DO_NOTHING,
-        **COMMON_NULLABLE_FIELD_CONFIG
+        **COMMON_NULLABLE_FIELD_CONFIG,
     )
     provided_email = models.EmailField(**COMMON_NULLABLE_FIELD_CONFIG)
     provided_phone_number = PhoneNumberField(**COMMON_NULLABLE_FIELD_CONFIG)

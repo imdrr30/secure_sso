@@ -30,6 +30,4 @@ def create_card_from_organization(cls, validated_data):
     return card
 
 
-CARD_ACTIONS = {
-    "create": classmethod(create_card_from_organization)
-}
+CARD_ACTIONS = {"create": classmethod(create_card_from_organization)}
