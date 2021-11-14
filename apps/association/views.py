@@ -189,7 +189,7 @@ class SecureVerifyView(APIView):
 
         association = CardOrganizationAssociation.objects.get_or_none(
             card__card_uid=card_uid,
-            organization=self.request.organization,
+            organization=self.request.user.organization,
             is_deleted=False,
             is_association_accepted_by_user=True,
         )
