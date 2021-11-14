@@ -35,7 +35,7 @@ class RegistrationView(LogoutRequired, BaseAPIView):
         )
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        Card.objects.filter(phone_number=user.phone_number).update(card_owned_by=user)
+        Card.objects.filter(provided_phone_number=user.phone_number).update(card_owned_by=user)
         token = user.create_user_token()
         return success_response(
             "Registration Completed Successfully.",
