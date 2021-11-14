@@ -116,6 +116,8 @@ class BaseModelViewSet(ModelViewSet):
                 model = self.get_model()
                 fields = meta_class_fields["fields"]
 
+            request = self.request
+
         serializer = BaseSerializer
 
         for field, data in meta_class_fields.items():

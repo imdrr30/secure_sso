@@ -9,7 +9,7 @@ from apps.helpers.common import get_or_none
 
 class CardViewSet(BaseModelViewSet):
 
-    serializer_class = Card
+    model_data = Card
 
     def get_user_access_codes(self):
         model_queryset = Card.objects.all()
