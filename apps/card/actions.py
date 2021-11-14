@@ -16,8 +16,7 @@ def create_card_from_organization(cls, validated_data):
     card = Card(**validated_data)
     try:
         users = User.objects.get(phone_number=validated_data["provided_phone_number"])
-        if len(users) > 0:
-            card.card_owned_by = users[0]
+        card.card_owned_by = users
     except User.DoesNotExist:
         pass
     card.save()
