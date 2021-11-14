@@ -167,7 +167,7 @@ class AssociationViewSet(BaseModelViewSet):
         model_queryset = CardOrganizationAssociation.objects.all()
         return {
             "END_USER": {
-                "queryset": model_queryset,
+                "queryset": model_queryset.filter(card__card_owned_by=self.request.user),
                 "common_meta": {
                     "fields": "__all__",
                 },

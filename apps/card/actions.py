@@ -1,5 +1,6 @@
 from .models import Card
 from apps.association.models import CardOrganizationAssociation
+from ..authentication.models import User
 
 
 def create_card_from_organization(cls, validated_data):
