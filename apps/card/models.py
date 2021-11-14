@@ -29,3 +29,5 @@ class Card(BaseModel):
         on_delete=models.SET_DEFAULT,
         **COMMON_BLANK_AND_NULLABLE_FIELD_CONFIG,
     )
+
+    custom_data = models.JSONField(**COMMON_NULLABLE_FIELD_CONFIG)

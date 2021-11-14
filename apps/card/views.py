@@ -2,6 +2,7 @@ from apps.common.views.viewsets import BaseModelViewSet
 from .models import CardType, Card
 from django.db.models import Q
 from .actions import CARD_ACTIONS
+from apps.helpers.common import get_or_none
 
 # Create your views here.
 
@@ -43,7 +44,7 @@ class CardViewSet(BaseModelViewSet):
             },
             "SUPERADMIN_ORG": {
                 "queryset": model_queryset.filter(
-                    provided_organization=self.request.user.organization
+                    provided_organization=get_or_none(self.request.user.organization)
                 ),
                 "common_meta": {
                     "fields": "__all__",
@@ -59,7 +60,7 @@ class CardViewSet(BaseModelViewSet):
             },
             "ADMIN_ORG": {
                 "queryset": model_queryset.filter(
-                    provided_organization=self.request.user.organization
+                    provided_organization=get_or_none(self.request.user.organization)
                 ),
                 "common_meta": {
                     "fields": "__all__",
@@ -75,7 +76,7 @@ class CardViewSet(BaseModelViewSet):
             },
             "EMP_ORG": {
                 "queryset": model_queryset.filter(
-                    provided_organization=self.request.user.organization
+                    provided_organization=get_or_none(self.request.user.organization)
                 ),
                 "common_meta": {
                     "fields": "__all__",
@@ -92,8 +93,8 @@ class CardViewSet(BaseModelViewSet):
             "END_USER": {
                 "queryset": model_queryset.filter(
                     Q(card_owned_by=self.request.user)
-                    | Q(provided_email=self.request.user.email)
-                    | Q(provided_phone_number=self.request.user.phone_number)
+                    | Q(provided_email=get_or_none(self.request.user.email))
+                    | Q(provided_phone_number=get_or_none(self.request.user.phone_number))
                 ),
                 "common_meta": {
                     "fields": "__all__",
@@ -137,6 +138,46 @@ class CardTypeViewSet(BaseModelViewSet):
                     "create": True,
                     "delete": True,
                     "update": True,
+                    "detail": True,
+                },
+            },
+            "SUPERADMIN_ORG": {
+                "queryset": model_queryset,
+                "common_meta": {
+                    "fields": "__all__",
+                },
+                "operations": {
+                    "list": True,
+                    "detail": True,
+                },
+            },
+            "ADMIN_ORG": {
+                "queryset": model_queryset,
+                "common_meta": {
+                    "fields": "__all__",
+                },
+                "operations": {
+                    "list": True,
+                    "detail": True,
+                },
+            },
+            "EMP_ORG": {
+                "queryset": model_queryset,
+                "common_meta": {
+                    "fields": "__all__",
+                },
+                "operations": {
+                    "list": True,
+                    "detail": True,
+                },
+            },
+            "END_USER": {
+                "queryset": model_queryset,
+                "common_meta": {
+                    "fields": "__all__",
+                },
+                "operations": {
+                    "list": True,
                     "detail": True,
                 },
             },
