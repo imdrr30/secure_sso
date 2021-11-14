@@ -32,7 +32,7 @@ class GetNewPairCodeView(APIView):
         return success_response(
             "Pair Code Generated.",
             201,
-            data={"code": paircode.code, "card": paircode.card},
+            data={"code": paircode.code, "card": paircode.card.id},
         )
 
 
