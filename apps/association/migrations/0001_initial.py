@@ -9,42 +9,67 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='CardOrganizationAssociation',
+            name="CardOrganizationAssociation",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
-                ('is_deleted', models.BooleanField(default=False)),
-                ('user_id_for_organization', models.TextField(default=None, null=True)),
-                ('customer_data', models.JSONField(default=None, null=True)),
-                ('is_association_accepted_by_user', models.BooleanField(default=False)),
-                ('is_association_accepted_by_organization', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                ("is_active", models.BooleanField(default=True)),
+                ("is_deleted", models.BooleanField(default=False)),
+                ("user_id_for_organization", models.TextField(default=None, null=True)),
+                ("customer_data", models.JSONField(default=None, null=True)),
+                ("is_association_accepted_by_user", models.BooleanField(default=False)),
+                (
+                    "is_association_accepted_by_organization",
+                    models.BooleanField(default=False),
+                ),
             ],
             options={
-                'ordering': ['-created'],
-                'abstract': False,
+                "ordering": ["-created"],
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='PairCode',
+            name="PairCode",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
-                ('is_deleted', models.BooleanField(default=False)),
-                ('code', models.CharField(default=apps.helpers.random.get_pair_code, max_length=8, unique=True)),
-                ('is_used_or_revoked', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                ("is_active", models.BooleanField(default=True)),
+                ("is_deleted", models.BooleanField(default=False)),
+                (
+                    "code",
+                    models.CharField(
+                        default=apps.helpers.random.get_pair_code,
+                        max_length=8,
+                        unique=True,
+                    ),
+                ),
+                ("is_used_or_revoked", models.BooleanField(default=False)),
             ],
             options={
-                'ordering': ['-created'],
-                'abstract': False,
+                "ordering": ["-created"],
+                "abstract": False,
             },
         ),
     ]

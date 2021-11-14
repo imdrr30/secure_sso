@@ -28,6 +28,7 @@ USER_APPS = [
     "apps.common",
     "apps.meta",
     "apps.organization",
+    "apps.trackers",
 ]
 
 THIRD_PARTY_APPS = [

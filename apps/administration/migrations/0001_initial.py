@@ -8,26 +8,39 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='UserType',
+            name="UserType",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
-                ('is_deleted', models.BooleanField(default=False)),
-                ('identity', models.CharField(max_length=512, verbose_name='Name/Title')),
-                ('description', models.TextField(blank=True, default=None, null=True)),
-                ('user_access_level', models.PositiveIntegerField(default=1)),
-                ('user_access_code', models.CharField(default=None, max_length=512, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                ("is_active", models.BooleanField(default=True)),
+                ("is_deleted", models.BooleanField(default=False)),
+                (
+                    "identity",
+                    models.CharField(max_length=512, verbose_name="Name/Title"),
+                ),
+                ("description", models.TextField(blank=True, default=None, null=True)),
+                ("user_access_level", models.PositiveIntegerField(default=1)),
+                (
+                    "user_access_code",
+                    models.CharField(default=None, max_length=512, null=True),
+                ),
             ],
             options={
-                'ordering': ['-created'],
-                'abstract': False,
+                "ordering": ["-created"],
+                "abstract": False,
             },
         ),
     ]

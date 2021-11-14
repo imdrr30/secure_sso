@@ -167,7 +167,9 @@ class AssociationViewSet(BaseModelViewSet):
         model_queryset = CardOrganizationAssociation.objects.all()
         return {
             "END_USER": {
-                "queryset": model_queryset.filter(card__card_owned_by=self.request.user),
+                "queryset": model_queryset.filter(
+                    card__card_owned_by=self.request.user
+                ),
                 "common_meta": {
                     "fields": "__all__",
                 },
@@ -198,7 +200,7 @@ class SecureVerifyView(APIView):
             return error_response("NO_ASSOCIATION", "No association found.", 404)
 
         return success_response(
-            "Associated.",
+            "Found.",
             200,
             data={
                 "user_id_for_organization": association.user_id_for_organization,

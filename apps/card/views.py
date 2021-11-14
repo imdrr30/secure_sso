@@ -1,3 +1,5 @@
+from rest_framework.views import APIView
+
 from apps.common.views.viewsets import BaseModelViewSet
 from .models import CardType, Card
 from django.db.models import Q

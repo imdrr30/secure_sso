@@ -14,37 +14,88 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
-                ('is_deleted', models.BooleanField(default=False)),
-                ('username', models.CharField(max_length=512, unique=True)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('first_name', models.CharField(blank=True, default=None, max_length=512, null=True)),
-                ('last_name', models.CharField(blank=True, default=None, max_length=512, null=True)),
-                ('password', models.CharField(default=None, max_length=512, null=True)),
-                ('is_staff', models.BooleanField(default=False)),
-                ('is_superuser', models.BooleanField(default=False)),
-                ('phone_number', phonenumber_field.modelfields.PhoneNumberField(default=None, max_length=128, null=True, region=None)),
-                ('date_joined', models.DateTimeField(default=django.utils.timezone.now)),
-                ('created_by', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='created_user', to=settings.AUTH_USER_MODEL)),
-                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                ("is_active", models.BooleanField(default=True)),
+                ("is_deleted", models.BooleanField(default=False)),
+                ("username", models.CharField(max_length=512, unique=True)),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                (
+                    "first_name",
+                    models.CharField(
+                        blank=True, default=None, max_length=512, null=True
+                    ),
+                ),
+                (
+                    "last_name",
+                    models.CharField(
+                        blank=True, default=None, max_length=512, null=True
+                    ),
+                ),
+                ("password", models.CharField(default=None, max_length=512, null=True)),
+                ("is_staff", models.BooleanField(default=False)),
+                ("is_superuser", models.BooleanField(default=False)),
+                (
+                    "phone_number",
+                    phonenumber_field.modelfields.PhoneNumberField(
+                        default=None, max_length=128, null=True, region=None
+                    ),
+                ),
+                (
+                    "date_joined",
+                    models.DateTimeField(default=django.utils.timezone.now),
+                ),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_DEFAULT,
+                        related_name="created_user",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "groups",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.Group",
+                        verbose_name="groups",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-created'],
-                'abstract': False,
+                "ordering": ["-created"],
+                "abstract": False,
             },
             managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
+                ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
     ]

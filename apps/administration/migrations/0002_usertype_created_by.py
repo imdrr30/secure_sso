@@ -11,13 +11,20 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('administration', '0001_initial'),
+        ("administration", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='usertype',
-            name='created_by',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='created_usertype', to=settings.AUTH_USER_MODEL),
+            model_name="usertype",
+            name="created_by",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.SET_DEFAULT,
+                related_name="created_usertype",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
