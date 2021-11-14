@@ -30,7 +30,12 @@ USER_APPS = [
     "apps.organization",
 ]
 
-THIRD_PARTY_APPS = ["rest_framework", "django_filters", "rest_framework.authtoken", "corsheaders"]
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "django_filters",
+    "rest_framework.authtoken",
+    "corsheaders",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -135,12 +140,10 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
     ],
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'staticfiles')
-]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIR = [os.path.join(BASE_DIR, "staticfiles")]
 
 CORS_ALLOW_ALL_ORIGINS = True

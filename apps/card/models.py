@@ -30,4 +30,6 @@ class Card(BaseModel):
         **COMMON_BLANK_AND_NULLABLE_FIELD_CONFIG,
     )
 
-    custom_data = models.JSONField(**COMMON_NULLABLE_FIELD_CONFIG)
+    user_id_for_organization = models.TextField(**COMMON_NULLABLE_FIELD_CONFIG)
+
+    customer_data = models.JSONField(**COMMON_NULLABLE_FIELD_CONFIG)

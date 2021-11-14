@@ -94,7 +94,11 @@ class CardViewSet(BaseModelViewSet):
                 "queryset": model_queryset.filter(
                     Q(card_owned_by=self.request.user)
                     | Q(provided_email=get_or_none(self.request.user.email))
-                    | Q(provided_phone_number=get_or_none(self.request.user.phone_number))
+                    | Q(
+                        provided_phone_number=get_or_none(
+                            self.request.user.phone_number
+                        )
+                    )
                 ),
                 "common_meta": {
                     "fields": "__all__",

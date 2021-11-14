@@ -8,8 +8,11 @@ from apps.common.views.permissions import UserTypeAccess
 class BaseModelViewSet(ModelViewSet):
     action_type = None
     model_data = None
-    filterset_fields = '__all__'
-    permission_classes = (IsAuthenticated, UserTypeAccess,)
+    filterset_fields = "__all__"
+    permission_classes = (
+        IsAuthenticated,
+        UserTypeAccess,
+    )
 
     def get_user_access_codes(self):
         return {}

@@ -20,3 +20,5 @@ class Organization(BaseIdentityModel):
     superadmin_password = models.CharField(
         max_length=512, **COMMON_NULLABLE_FIELD_CONFIG
     )
+
+    webhook_url = models.URLField(max_length=512, **COMMON_NULLABLE_FIELD_CONFIG)
