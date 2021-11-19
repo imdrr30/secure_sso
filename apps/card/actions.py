@@ -1,6 +1,8 @@
 from .models import Card
 from apps.association.models import CardOrganizationAssociation
 from ..authentication.models import User
+from apps.organization.serializers import OrganizationSerializer
+from rest_framework import serializers
 
 
 def create_card_from_organization(cls, validated_data):
@@ -36,4 +38,6 @@ def create_card_from_organization(cls, validated_data):
     return card
 
 
-CARD_ACTIONS = {"create": classmethod(create_card_from_organization)}
+CARD_ACTIONS = {
+    "create": classmethod(create_card_from_organization),
+}

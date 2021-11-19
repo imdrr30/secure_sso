@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from apps.common.views.permissions import UserTypeAccess
+from apps.organization.serializers import OrganizationSerializer
 
 
 class BaseModelViewSet(ModelViewSet):
@@ -25,6 +26,19 @@ class BaseModelViewSet(ModelViewSet):
             "data": response.data,
         }
         response.data = data
+        return response
+
+    @staticmethod
+    def wrap_error_response(response, message, error_code=None, status=None):
+        data = {
+            "status": "failed",
+            "message": message,
+            "error_code": error_code,
+            "data": response.data,
+        }
+        response.data = data
+        if not status:
+            response.status = status
         return response
 
     def get_model(self):
@@ -113,7 +127,12 @@ class BaseModelViewSet(ModelViewSet):
         class BaseSerializer(serializers.ModelSerializer):
             class Meta:
                 model = self.get_model()
-                fields = meta_class_fields["fields"]
+
+            if hasattr(self.get_model(), "provided_organization"):
+                provided_organization = OrganizationSerializer()
+
+            if hasattr(self.get_model(), "organization"):
+                organization = OrganizationSerializer()
 
             request = self.request
 
