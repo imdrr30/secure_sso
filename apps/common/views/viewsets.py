@@ -141,7 +141,9 @@ class BaseModelViewSet(ModelViewSet):
                 associations = serializers.SerializerMethodField()
 
                 def get_associations(self, card):
-                    return AssociationSerializer(CardOrganizationAssociation.objects.filter(card=card), many=True).data
+                    return AssociationSerializer(
+                        CardOrganizationAssociation.objects.filter(card=card), many=True
+                    ).data
 
             request = self.request
 
