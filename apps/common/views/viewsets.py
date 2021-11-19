@@ -136,7 +136,10 @@ class BaseModelViewSet(ModelViewSet):
                 organization = OrganizationSerializer()
 
             if hasattr(self.get_model(), "card_uid"):
-                associations = AssociationSerializer(many=True, read_only=True)
+                associations = serializers.SerializerMethodField()
+
+                def get_associations(self, card):
+                    return AssociationSerializer(card.association_set.all(), many=True).data
 
             request = self.request
 
