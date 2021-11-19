@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from apps.common.views.permissions import UserTypeAccess
 from apps.organization.serializers import OrganizationSerializer
+from apps.association.serializers import AssociationSerializer
 
 
 class BaseModelViewSet(ModelViewSet):
@@ -133,6 +134,9 @@ class BaseModelViewSet(ModelViewSet):
 
             if hasattr(self.get_model(), "organization"):
                 organization = OrganizationSerializer()
+
+            if hasattr(self.get_model(), "card_owned_by"):
+                associations = AssociationSerializer(many=True, read_only=True)
 
             request = self.request
 
