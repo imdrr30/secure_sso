@@ -16,7 +16,7 @@ urlpatterns = [
     ),
     path("activate-association-user/", views.ActivateAssociationByUser.as_view()),
     path(
-        "activate-association-user/", views.ActivateAssociationByOrganization.as_view()
+        "activate-association-organization/", views.ActivateAssociationByOrganization.as_view()
     ),
     path("secure-auth/", views.SecureVerifyView.as_view()),
 ]
