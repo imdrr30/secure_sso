@@ -6,6 +6,8 @@ from apps.common.views.permissions import UserTypeAccess
 from apps.organization.serializers import OrganizationSerializer
 from apps.association.serializers import AssociationSerializer
 
+CardOrganizationAssociation = AssociationSerializer.Meta.model
+
 
 class BaseModelViewSet(ModelViewSet):
     action_type = None
@@ -139,7 +141,7 @@ class BaseModelViewSet(ModelViewSet):
                 associations = serializers.SerializerMethodField()
 
                 def get_associations(self, card):
-                    return AssociationSerializer(card.association_set.all(), many=True).data
+                    return AssociationSerializer(CardOrganizationAssociation.objects.filter(card=card), many=True).data
 
             request = self.request
 
