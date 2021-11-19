@@ -135,7 +135,7 @@ class BaseModelViewSet(ModelViewSet):
             if hasattr(self.get_model(), "organization"):
                 organization = OrganizationSerializer()
 
-            if hasattr(self.get_model(), "card_owned_by"):
+            if hasattr(self.get_model(), "card_uid"):
                 associations = AssociationSerializer(many=True, read_only=True)
 
             request = self.request

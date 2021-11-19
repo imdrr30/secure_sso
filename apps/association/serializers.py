@@ -1,6 +1,5 @@
 from rest_framework.serializers import ModelSerializer
 from .models import CardOrganizationAssociation
-from apps.card.models import Card
 from apps.organization.serializers import OrganizationSerializer
 
 
