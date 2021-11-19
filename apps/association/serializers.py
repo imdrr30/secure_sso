@@ -10,11 +10,4 @@ class AssociationSerializer(ModelSerializer):
     class Meta:
         model = CardOrganizationAssociation
         fields = '__all__'
-
-
-class CardSerializer(ModelSerializer):
-    associations = AssociationSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Card
-        fields = '__all__'
+        depth = 1
