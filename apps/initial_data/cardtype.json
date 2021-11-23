@@ -1,8 +1,10 @@
 [
   {
+    "id": "6a3c8807-f834-4f23-8d3b-8adebc67024a",
     "identity": "Mifare - Standard"
   },
   {
+    "id": "0109d11d-18e0-4371-988d-7e2fd94aa31f",
     "identity": "Mifare - Desfire v1"
   }
 ]
